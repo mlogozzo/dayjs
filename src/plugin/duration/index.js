@@ -5,7 +5,7 @@ import {
   MILLISECONDS_A_SECOND,
   MILLISECONDS_A_WEEK,
   REGEX_FORMAT
-} from '../../constant'
+} from '../../constant.js'
 
 const MILLISECONDS_A_YEAR = MILLISECONDS_A_DAY * 365
 const MILLISECONDS_A_MONTH = MILLISECONDS_A_YEAR / 12

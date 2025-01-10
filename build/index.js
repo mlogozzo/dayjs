@@ -1,5 +1,5 @@
 const rollup = require('rollup')
-const configFactory = require('./rollup.config')
+const configFactory = require('./rollup.config.js')
 const fs = require('fs')
 const util = require('util')
 const path = require('path')
