@@ -2,8 +2,41 @@
   "name": "dayjs",
   "version": "0.0.0-development",
   "description": "2KB immutable date time library alternative to Moment.js with the same modern API ",
-  "main": "./cjs/dayjs.min.cjs",
-  "types": "index.d.ts",
+  "type": "module",
+  "main": "./esm/index.js",
+  "types": "./esm/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./esm/index.d.ts",
+        "default": "./esm/index.js"
+      },
+      "require": {
+        "types": "./cjs/index.d.ts",
+        "default": "./cjs/dayjs.min.cjs"
+      }
+    },
+    "./plugin/*": {
+      "import": {
+        "types": "./esm/plugin/*/index.d.ts",
+        "default": "./esm/plugin/*/index.js"
+      },
+      "require": {
+        "types": "./cjs/plugin/*.d.ts",
+        "default": "./cjs/plugin/*.cjs"
+      }
+    },
+    "./locale/*": {
+      "import": {
+        "types": "./esm/locale/*/index.d.ts",
+        "default": "./esm/locale/*/index.js"
+      },
+      "require": {
+        "types": "./cjs/locale/*.d.ts",
+        "default": "./cjs/locale/*.cjs"
+      }
+    }
+  },
   "scripts": {
     "test": "TZ=Pacific/Auckland npm run test-tz && TZ=Europe/London npm run test-tz && TZ=America/Whitehorse npm run test-tz && npm run test-tz && jest",
     "test-tz": "date && jest test/timezone.test --coverage=false",
