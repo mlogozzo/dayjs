@@ -13,12 +13,8 @@ yarn.lock
 coverage
 
 # build
-/locale
-/plugin
-/dayjs.min.js
 /esm
-/index.d.ts
-locale.json
+/cjs
 
 #dev
 demo.js

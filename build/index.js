@@ -30,7 +30,7 @@ async function listLocaleJson(localeArr) {
       name: localeData.match(localeNameRegex)[1]
     })
   }))
-  promisifyWriteFile(path.join(__dirname, '../locale.json'), JSON.stringify(localeListArr), 'utf8')
+  promisifyWriteFile(path.join(__dirname, '../cjs/locale.json'), JSON.stringify(localeListArr), 'utf8')
 }
 
 (async () => {
@@ -42,7 +42,7 @@ async function listLocaleJson(localeArr) {
       // run builds sequentially to limit RAM usage
       await build(configFactory({
         input: `./src/locale/${l}`,
-        fileName: `./locale/${l}`,
+        fileName: `./cjs/locale/${l}`,
         name: `dayjs_locale_${formatName(l)}`
       }))
     }
@@ -52,17 +52,17 @@ async function listLocaleJson(localeArr) {
       // run builds sequentially to limit RAM usage
       await build(configFactory({
         input: `./src/plugin/${plugin}/index`,
-        fileName: `./plugin/${plugin}.js`,
+        fileName: `./cjs/plugin/${plugin}.js`,
         name: `dayjs_plugin_${formatName(plugin)}`
       }))
     }
 
     build(configFactory({
       input: './src/index.js',
-      fileName: './dayjs.min.js'
+      fileName: './cjs/dayjs.min.js'
     }))
 
-    await promisify(ncp)('./types/', './')
+    await promisify(ncp)('./types/', './cjs/')
 
     // list locales
     await listLocaleJson(locales)
