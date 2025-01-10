@@ -2,18 +2,18 @@
   "name": "dayjs",
   "version": "0.0.0-development",
   "description": "2KB immutable date time library alternative to Moment.js with the same modern API ",
-  "main": "./cjs/dayjs.min.js",
+  "main": "./cjs/dayjs.min.cjs",
   "types": "index.d.ts",
   "scripts": {
     "test": "TZ=Pacific/Auckland npm run test-tz && TZ=Europe/London npm run test-tz && TZ=America/Whitehorse npm run test-tz && npm run test-tz && jest",
     "test-tz": "date && jest test/timezone.test --coverage=false",
     "lint": "eslint src/* build/*",
     "prettier": "prettier --write \"docs/**/*.md\"",
-    "babel": "cross-env BABEL_ENV=build babel src --out-dir esm --copy-files && node build/esm",
-    "build": "cross-env BABEL_ENV=build node build && npm run size",
-    "sauce": "npx karma start karma.sauce.conf.js",
+    "babel": "cross-env BABEL_ENV=build babel src --out-dir esm --copy-files && node build/esm.cjs",
+    "build": "cross-env BABEL_ENV=build node build/index.cjs && npm run size",
+    "sauce": "npx karma start karma.sauce.conf.cjs",
     "test:sauce": "npm run sauce -- 0 && npm run sauce -- 1 && npm run sauce -- 2  && npm run sauce -- 3",
-    "size": "size-limit && gzip-size ./cjs/dayjs.min.js"
+    "size": "size-limit && gzip-size ./cjs/dayjs.min.cjs"
   },
   "pre-commit": [
     "lint"
@@ -21,7 +21,7 @@
   "size-limit": [
     {
       "limit": "2.99 KB",
-      "path": "./cjs/dayjs.min.js"
+      "path": "./cjs/dayjs.min.cjs"
     }
   ],
   "jest": {

@@ -1,5 +1,5 @@
 const rollup = require('rollup')
-const configFactory = require('./rollup.config.js')
+const configFactory = require('./rollup.config.cjs')
 const fs = require('fs')
 const util = require('util')
 const path = require('path')
@@ -42,7 +42,7 @@ async function listLocaleJson(localeArr) {
       // run builds sequentially to limit RAM usage
       await build(configFactory({
         input: `./src/locale/${l}`,
-        fileName: `./cjs/locale/${l}`,
+        fileName: `./cjs/locale/${l.replace('.js', '.cjs')}`,
         name: `dayjs_locale_${formatName(l)}`
       }))
     }
@@ -52,14 +52,14 @@ async function listLocaleJson(localeArr) {
       // run builds sequentially to limit RAM usage
       await build(configFactory({
         input: `./src/plugin/${plugin}/index`,
-        fileName: `./cjs/plugin/${plugin}.js`,
+        fileName: `./cjs/plugin/${plugin}.cjs`,
         name: `dayjs_plugin_${formatName(plugin)}`
       }))
     }
 
     build(configFactory({
       input: './src/index.js',
-      fileName: './cjs/dayjs.min.js'
+      fileName: './cjs/dayjs.min.cjs'
     }))
 
     await promisify(ncp)('./types/', './cjs/')
